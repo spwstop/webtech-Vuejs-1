@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">EX-ROUTERLINK</router-link>
+      <router-link to="/">EX-ROUTERLINK</router-link> |
+      <router-link to="/scoreboard">Score Board</router-link>
+
     </div>
     <router-view/>
   </div>
