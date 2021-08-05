@@ -1,9 +1,53 @@
 <template>
-  <div>place for reward create form</div>
+  <div>
+    place for reward create form
+    <div>
+      <label for="name_rewards">Add Reward  </label>
+        <input type="text" v-model="form.name_rewards">
+        <label for="point">  Add Point  </label>
+        <input type="integer" v-model="form.point">
+        <label for="total_reward"> Total</label>
+        <input type="integer" v-model="form.total">
+    </div>
+    <div>
+        <button @click="addReward">Add</button>
+      </div>
+  </div>
 </template>
 
 <script>
+import AdminStore from "@/store/AdminStore"
 export default {
+  data(){
+    return{
+      form:{
+        name_rewards: "",
+        point: "",
+        total_reward:"",
+      },
+    }
+  },
+  methods: {
+    clearForm(){
+      this.form = {
+        name_rewards: "",
+        point: "",
+        total_reward: "",
+      }
+    },
+    addReward(){
+      let payload = {
+        name_rewards: this.form.name_rewards,
+        point: this.form.point,
+        total: this.form.total_reward,
+      }
+
+      AdminStore.dispatch("addReward", payload)
+      this.clearForm()
+
+    },
+
+  },
 
 }
 </script>
