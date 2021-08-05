@@ -2,7 +2,8 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Login</router-link> |
-      <router-link to="/scoreboard">Score Board</router-link>
+      <router-link to="/scoreboard">Score Board</router-link> |
+      <router-link to="/register">Register</router-link>
     </div>
     <router-view/>
   </div>
