@@ -93,7 +93,7 @@ export default {
     }
   },
 
-  async editReward(index, reward){
+  async editReward(){
     let payload = {
       id: this.rewards[this.editIndex].id,
       name_rewards: this.form.name_rewards,
