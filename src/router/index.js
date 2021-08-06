@@ -4,7 +4,7 @@ import ScoreBoard from '@/views/ScoreBoard.vue'
 import Register from '@/views/Register.vue'
 import RedeemReward from '@/views/RedeemReward.vue'
 import Login from '@/views/Login.vue'
-
+import Logout from '@/views/Logout.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -12,6 +12,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/logout',
+    name: 'Logout',
+    component: Logout
   },
   {
     path: '/scoreboard',

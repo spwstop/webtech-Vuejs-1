@@ -43,10 +43,10 @@ export default new Vuex.Store({
             }
             return res
         },
-        // async logout ({ commit }) {
-        //     AuthService.logout()
-        //     commit('LOGOUT_SUCCESS')
-        // },
+        async logout ({ commit }) {
+            AuthService.logout()
+            commit('LOGOUT_SUCCESS')
+        },
 
         async register ({ commit }, user) {
             let res = await AuthService.register(user)

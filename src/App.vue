@@ -3,12 +3,24 @@
     <div id="nav">
       <router-link to="/login">Login</router-link> |
       <router-link to="/scoreboard">Score Board</router-link> |
-      <router-link to="/redeemreward">Redeem Reward</router-link>
+      <router-link to="/redeemreward">Redeem Reward</router-link> |
       <router-link to="/register">Register</router-link> |
+      <router-link v-if="isAuthen()" to="/logout">logout</router-link> 
     </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+import AuthUser from '@/store/AuthUser'
+export default {
+  methods:{
+    isAuthen(){
+      return AuthUser.getters.isAuthen
+    }
+  }
+}
+</script>
 
 <style lang="scss">
 #app {

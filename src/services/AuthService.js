@@ -53,6 +53,9 @@ export default{
             }
         }
     },
+    logout(){
+        localStorage.removeItem(auth_key)
+    },
 
     async register ({username, email, password}) {
         try {

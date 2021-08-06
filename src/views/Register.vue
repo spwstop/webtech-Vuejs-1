@@ -8,11 +8,6 @@
             <div><input v-model="input.email" type="text" autocomplete="off" placeholder="Email"></div>
             <div><label for="password">Password</label></div>
             <div><input v-model="input.password" type="password" placeholder="Password"></div>
-
-            <!-- TODO #2 : ทำ Confirm Password -->
-            <!-- <div><label for="password_confirmation">Confirm Password</label></div>
-            <div><input v-model="input.password_confirmation" type="password" placeholder="Confirm Password"></div> -->
-
             <div><button type="submit">Register</button></div>
         </form>
     </div>
@@ -27,7 +22,6 @@ export default {
                 username: '',
                 email: '',
                 password: '',
-                // password_confirmation: ''
             }
         } 
     },
