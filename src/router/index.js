@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Login from '../views/Login.vue'
 import ScoreBoard from '@/views/ScoreBoard.vue'
 import Register from '@/views/Register.vue'
 import RedeemReward from '@/views/RedeemReward.vue'
+import Login from '@/views/Login.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/login',
     name: 'Login',
     component: Login
   },
@@ -19,14 +19,14 @@ const routes = [
     component: ScoreBoard
   },
   {
-    path: '/register',
-    name: 'Register',
-    component: Register
-  },
-  {
     path: '/redeemreward',
     name: 'RedeemReward',
     component: RedeemReward
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register
   },
 ]
 

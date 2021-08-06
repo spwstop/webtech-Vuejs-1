@@ -15,7 +15,6 @@
 
             <div><button type="submit">Register</button></div>
         </form>
-        <router-link to="/login" class="text-warning">Login</router-link>
     </div>
 </template>
 
@@ -56,7 +55,7 @@ export default {
     },
     mounted() {
         if (this.isAuthen()) {
-            this.$router.push("/user")
+            this.$router.push("/login")
         }
     }
 }

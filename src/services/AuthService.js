@@ -1,6 +1,6 @@
 import Axios from 'axios'
 
-const auth_key = "auth-daily-routine"
+const auth_key = "auth-user"
 let auth = JSON.parse(localStorage.getItem(auth_key))
 const user = auth ? auth.user : ""
 const jwt = auth ? auth.jwt : ""
