@@ -3,7 +3,7 @@ import Vue from "vue"
 import Vuex from "vuex"
 import AuthService from "@/services/AuthService"
 
-const api_endpoint = process.env.VUE_APP_GAMBLE_ENDPOINT || "http://localhost:1337"
+const api_endpoint = process.env.VUE_APP_ENDPOINT || "http://localhost:1337"
 
 Vue.use(Vuex)
 
