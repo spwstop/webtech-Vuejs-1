@@ -4,7 +4,7 @@
       <button @click="findTopRank()">Sort use Point</button>
       <div>
         <label>
-            Strart date
+            Start date
         </label>
         <input type="date" v-model="startDate">
         <label>
@@ -26,7 +26,7 @@
               <td>{{ index +1 }}</td>
               <td>{{ user.username }}</td>
               <td>{{ user.use_point }}</td>
-              <td>{{user.date}}</td>
+              <td>{{ user.date}}</td>
           </tr>
         </tbody>
       </table>
@@ -44,6 +44,7 @@ export default {
       form: {
         username: "",
         use_point: "",
+        user_point: "",
       },
       startDate: "",
       endDate: "",
