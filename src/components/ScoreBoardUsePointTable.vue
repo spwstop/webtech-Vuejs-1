@@ -1,6 +1,18 @@
 <template>
   <div>
       place for scoreboard use point table
+      <button @click="findTopRank()">Sort use Point</button>
+      <div>
+        <label>
+            Strart date
+        </label>
+        <input type="date" v-model="startDate">
+        <label>
+            End date
+        </label>
+        <input type="date" v-model="endDate">
+        <button @click="filterItem()">Filter Date</button>
+      </div>
       <table>
         <thead>
           <tr>
@@ -10,11 +22,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(user, index) in users" :key="index">
+          <tr v-for="(user, index) in userFilter" :key="index">
               <td>{{ index +1 }}</td>
-
               <td>{{ user.username }}</td>
               <td>{{ user.use_point }}</td>
+              <td>{{user.date}}</td>
           </tr>
         </tbody>
       </table>
@@ -28,11 +40,13 @@ export default {
   data(){
     return {
       users: [],
-
+      userFilter: [],
       form: {
         username: "",
         use_point: "",
       },
+      startDate: "",
+      endDate: "",
     }
   },
 
@@ -44,7 +58,35 @@ export default {
     async fetchUser(){
       await HistoryUseScore.dispatch("fetchUser")
       this.users = HistoryUseScore.getters.users
+      this.userFilter = this.users
     },
+    findTopRank(){
+      let sortable = [];
+      for(let i in this.userFilter){
+        sortable.push(this.userFilter[i])
+        sortable.sort((a, b) => b.use_point - a.use_point)
+      };
+      this.userFilter = sortable
+    },
+    filterItem() {
+      const startDate = new Date(this.startDate);   
+      const endDate = new Date(this.endDate);  
+      
+      console.log(this.startDate, this.endDate);
+      this.userFilter = this.users.filter(item => {
+        const itemDate = new Date(item.date)
+        if (startDate !== null && endDate !== null) {
+          return startDate <= itemDate && itemDate <= endDate;
+        }
+        if (startDate !== null && endDate === null) {
+          return startDate <= itemDate;
+        }
+        if (startDate === null && endDate !== null) {
+          return itemDate <= endDate;
+        }
+        return true;  
+      })
+    }
   }
 
 }
