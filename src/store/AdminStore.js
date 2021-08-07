@@ -23,9 +23,11 @@ export default new Vuex.Store({
       state.data.push(payload)
     },
     edit(state, payload ){
-      state.data[payload.id].name_rewards = payload.name_rewards
-      state.data[payload.id].point = payload.point
-      state.data[payload.id].total_reward = payload.total_reward
+      state.data = payload
+      // console.log("payload",payload);
+      // state.data[payload.id].name_rewards = payload.name_rewards
+      // state.data[payload.id].point = payload.point
+      // state.data[payload.id].total_reward = payload.total_reward
     },
     delete(state, payload){
       state.data.splice(payload)
@@ -39,13 +41,14 @@ export default new Vuex.Store({
     },
 
     async editReward({ commit }, payload){
-      console.log("payload id",payload.id);
+      
       let url = api_endpoint + "/rewards/" + payload.id
       let body = {
         name_rewards: payload.name_rewards,
         point: payload.point,
         total_reward: payload.total_reward
       }
+      
       let res = await axios.put(url, body)
       console.log("console log" ,res)
       if (res.status === 200){

@@ -37,7 +37,7 @@
           </td>
 
           <td v-if="index === editIndex">
-            <button @click="editReward">Update Reward</button>
+            <button @click="editReward(rew)">Update Reward</button>
             <button @click="closeForm">Cancel</button>
           </td>
 
@@ -72,8 +72,10 @@ export default {
   },
   methods: {
     async fetchReward(){
+      
       await AdminStore.dispatch("fetchReward")
       this.rewards = AdminStore.getters.rewards
+      
     },
 
     openForm(index, reward){
@@ -93,14 +95,15 @@ export default {
     }
   },
 
-  async editReward(){
+  async editReward(rew){
+    
     let payload = {
-      id: this.rewards[this.editIndex].id,
+      id: rew.id,
       name_rewards: this.form.name_rewards,
       point: this.form.point,
       total_reward: this.form.total_reward,
     }
-    console.log(payload)
+    console.log(payload);
     await AdminStore.dispatch("editReward", payload)
     this.closeForm()
     this.fetchReward()

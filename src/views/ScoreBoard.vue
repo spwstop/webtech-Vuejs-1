@@ -3,7 +3,7 @@
      Admin HomePage
      <reward-create-form></reward-create-form>
      <reward-table></reward-table>
-      <score-board-table></score-board-table>
+      <score-board-table></score-board-table> 
       <score-board-use-point-table></score-board-use-point-table>
   </div>
 </template>

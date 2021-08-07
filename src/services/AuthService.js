@@ -21,7 +21,16 @@ export default{
     getJwt () {
         return jwt
     },
-
+    getHeaders() {
+        if (jwt !== "") {
+          return {
+            headers: {
+              
+              Authorization: `Bearer ${jwt}`,
+            },
+          };
+        }
+      },
     async login ({username, password}) {
 
         try {

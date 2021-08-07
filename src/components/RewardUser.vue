@@ -18,10 +18,12 @@
             <td> {{ rew.point }}</td>
             <td> {{ rew.total_reward }}</td>
 
-            <td v-if="index !== reedeem">
-            <button @click="reedeem(index, rew)">Reedeem</button>
-            
+            <td v-if="index !== redeem">
+            <button @click="redeem(rew)">Redeem</button>
           </td>
+            <!-- <td v-if="index=== reedeem">
+              <input type="integer" v-model="form.total_reward">
+            </td> -->
             
 
           </tr>
@@ -55,17 +57,15 @@ export default {
       await AdminStore.dispatch("fetchReward")
       this.rewards = AdminStore.getters.rewards
     },
-
-    async reedeem(index, reward){
+    async redeem(rew){
       let payload = {
-      id: this.rewards[this.editIndex].id,
-      name_rewards: this.form.name_rewards,
-      point: this.form.point,
-      total_reward: this.form.total_reward -1,
-
-    }
-    await AdminStore.dispatch("deleteIndex", payload)
-    this.fetchReward()
+        id: rew.id,
+        name_rewards: rew.name_rewards,
+        point: rew.point,
+        total_reward: rew.total_reward-1,
+      }
+      await AdminStore.dispatch("editReward", payload)
+      this.fetchReward()
     },
   }
 
