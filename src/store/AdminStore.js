@@ -3,7 +3,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 
-let api_endpoint = process.env.ADMIN_ENDPOINT || 'http://localhost:1337'
+let api_endpoint = process.env.VUE_APP_ENDPOINT || 'http://localhost:1337'
 
 Vue.use(Vuex)
 
