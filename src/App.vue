@@ -3,6 +3,7 @@
     <div id="nav">
       <router-link to="/login">Login</router-link> 
       <router-link v-if="isAuthen()" to="/user"> User </router-link> 
+      <router-link v-if="isAuthen()" to="/finished"> Finished </router-link> 
       <router-link v-if="isAuthen()" to="/scoreboard"> Score Board </router-link> 
       <router-link v-if="isAuthen()" to="/redeemreward"> Redeem Reward </router-link> 
       <router-link to="/register">Register</router-link> 

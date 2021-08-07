@@ -94,6 +94,66 @@ export default{
             }
         }
     },
+    async addFinished ({userId, activityId}) {
+        try {
+            let url = `${api_endpoint}/finisheds`
+            let body = {
+                activity: activityId,
+                users_permissions_user : userId,
+            }
+            let res = await Axios.post(url, body)
+            if (res.status === 200) {
+                console.log(res.data);
+                localStorage.setItem(auth_key, JSON.stringify(res.data))
+                return {
+                    success : true,
+                    user: res.data.user,
+                    jwt: res.data.jwt
+                }
+            } else {
+                console.log("NOT 200",res);
+            }
+
+        } catch (e) {
+            console.error(e);
+            if (e.response.status === 400){
+                return{
+                    success: false,
+                    message: e.response.data.message[0].messages[0].message
+                }
+            }
+        }
+    },
+    async addPoint ({userId, newPoint}) {
+
+        try {
+            let url = api_endpoint+"/users/"+userId
+            let body = {
+                point : newPoint
+            }
+            let res = await Axios.put(url, body)
+            if (res.status === 200) {
+                console.log(res.data);
+                localStorage.setItem(auth_key, JSON.stringify(res.data))
+                return {
+                    success : true,
+                    user: res.data.user,
+                    jwt: res.data.jwt
+                }
+            } else {
+                console.log("NOT 200",res);
+            }
+
+        } catch (e) {
+            console.error(e);
+            if (e.response.status === 400){
+                return{
+                    success: false,
+                    message: e.response.data.message[0].messages[0].message
+                }
+            }
+        }
+    },
 
 
 }

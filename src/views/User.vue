@@ -1,9 +1,9 @@
 <template>
     <div>
-        <span>Username: {{currentUser.username}} </span>
-        <span>Point:{{currentUser.point}}</span>
-
-        <thead>
+        <div>Username: {{currentUser.username}} </div>
+        <div>Point:{{currentUser.point}}</div>
+        <span>
+            <thead>
             <tr>
                 <th>Activities name |</th>
                 <th>| Activities point</th>
@@ -15,10 +15,28 @@
                 <td>{{acti.activity_name}}</td>
                 <td>{{acti.activity_point}}</td>
                 <td>
-                    <button @click="plus">+</button>
+                    <button @click="openForm(index,acti)">Finish !</button>
                 </td>
             </tr>
         </tbody>
+        </span>
+
+        <!-- <span>
+            <thead>
+            <tr>
+                <th>Activities name |</th>
+                <th>| Activities point</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr v-for = "(fin, index) in finished" :key = "index">
+                <td v-if="fin.users_permissions_user.username === currentUser.username">{{fin.activity.activity_name}}</td>
+                <td v-if="fin.users_permissions_user.username === currentUser.username">{{fin.activity.activity_point}}</td>
+
+            </tr>
+        </tbody>
+        </span> -->
         
  
    </div>
@@ -27,13 +45,27 @@
 <script>
 import ActivitiesStore from '@/store/ActivitiesStore'
 import AuthUser from "@/store/AuthUser"
+import AuthService from '@/services/AuthService'
 
 export default {
     data() {
     return {
         activities: [],
+        activity:'',
 
+
+        finished: [],
         currentUser: '',
+
+        pointForm:{
+            newPoint : '',
+            userId:''
+        },
+
+        form:{
+            activityId: "",
+            userId:""          
+        }
       }
     },
     methods: {
@@ -44,24 +76,37 @@ export default {
             await ActivitiesStore.dispatch('fetchActivities')
             this.activities = ActivitiesStore.getters.activities
         },
-        plus() {
-            this.currentUser.point + 1
-            console.log(this.currentUser.point+1);
+        async fetchFinished(){
+            await ActivitiesStore.dispatch('fetchFinished')
+            this.finished = ActivitiesStore.getters.finished
+        },
+
+        openForm(index, activities) {
+            console.log('index', index);
+            console.log('activities', activities);
+            this.activity = activities
+            this.form.userId = this.currentUser.id
+            this.form.activityId = this.activity.id
+
+            this.pointForm.userId = this.currentUser.id
+            this.pointForm.newPoint = this.currentUser.point + this.activity.activity_point
+            let rev = AuthService.addPoint(this.pointForm)
+            let res = AuthService.addFinished(this.form)
+            this.$swal("Login Success", `Welcome`, "success")
+            this.$router.push('/finished')
         }
     },
     created() {
         this.getCurrentUser()
         this.fetchActivities()
-        // console.log(this.currentUser);
-        // console.log("______________");
-        // console.log(this.activities);
+        this.fetchFinished()
     }
 }
 </script>
 
 <style lang="scss">
 span{
-    font-size: 50px;
+    font-size: 20px;
 }
     
 </style>

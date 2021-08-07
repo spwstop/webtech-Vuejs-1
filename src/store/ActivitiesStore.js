@@ -14,32 +14,28 @@ export default new Vuex.Store({
 
     getters: {
         activities: (state) => state.data,
+        finished: (state) => state.data
     },
 
     mutations: {
         fetch(state, {res}){
             state.data = res.data
         },
-        // add(state, payload){
-        //     state.data[payload.id].point = payload.point
-        // }
+        
     },
 
     actions: {
         async fetchActivities ( {commit} ) {
             let res = await Axios.get(api_endpoint + "/activities")
             commit("fetch", {res})
-            console.log("__________");
             console.log(res);
         },
-        // async addActivities({commit}, payload){
-        //     let url = api_endpoint + "/activities"
-        //     let body = {
-        //         activity_name: payload.activity_name,
-        //         point: payload.point,
-                
-        //     }
-        // }
+        async fetchFinished ( {commit} ) {
+            let res = await Axios.get(api_endpoint + "/finisheds")
+            commit("fetch", {res})
+            console.log("____________");
+            console.log(res);
+        },
     },
     modules: {},
 })

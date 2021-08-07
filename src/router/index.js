@@ -6,6 +6,8 @@ import RedeemReward from '@/views/RedeemReward.vue'
 import Login from '@/views/Login.vue'
 import Logout from '@/views/Logout.vue'
 import User from '@/views/User.vue'
+import Finished from '@/views/Finished.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -28,6 +30,11 @@ const routes = [
     path: '/scoreboard',
     name: 'ScoreBoard',
     component: ScoreBoard
+  },
+  {
+    path: '/finished',
+    name: 'Finished',
+    component: Finished
   },
   {
     path: '/redeemreward',
