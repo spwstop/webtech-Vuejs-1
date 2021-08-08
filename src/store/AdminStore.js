@@ -24,10 +24,6 @@ export default new Vuex.Store({
     },
     edit(state, payload ){
       state.data = payload
-      // console.log("payload",payload);
-      // state.data[payload.id].name_rewards = payload.name_rewards
-      // state.data[payload.id].point = payload.point
-      // state.data[payload.id].total_reward = payload.total_reward
     },
     delete(state, payload){
       state.data.splice(payload)
@@ -45,7 +41,7 @@ export default new Vuex.Store({
       let url = api_endpoint + "/rewards/" + payload.id
       let body = {
         name_rewards: payload.name_rewards,
-        point: payload.point,
+        reward_point: payload.reward_point,
         total_reward: payload.total_reward
       }
       
@@ -63,7 +59,7 @@ export default new Vuex.Store({
       let url = api_endpoint + "/rewards"
       let body = {
         name_rewards: payload.name_rewards,
-        point: payload.point,
+        reward_point: payload.reward_point,
         total_reward: payload.total_reward
       }
       let res = await axios.post(url, body)
@@ -91,7 +87,7 @@ export default new Vuex.Store({
       let url = api_endpoint + "/rewards"
       let body = {
         name_rewards: payload.name_rewards,
-        point: payload.point,
+        reward_point: payload.reward_point,
         total_reward: payload.total_reward
 
       }

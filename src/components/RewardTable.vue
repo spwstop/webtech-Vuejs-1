@@ -21,9 +21,9 @@
             <input type="text" v-model="form.name_rewards" />
           </td>
 
-          <td v-if="index !== editIndex">{{ rew.point }}</td>
+          <td v-if="index !== editIndex">{{ rew.reward_point }}</td>
           <td v-if="index === editIndex">
-            <input type="integer" v-model="form.point" />
+            <input type="integer" v-model="form.reward_point" />
           </td>
 
           <td v-if="index !== editIndex">{{ rew.total_reward }}</td>
@@ -59,7 +59,7 @@ export default {
       editIndex: -1,
       form: {
         name_rewards: "",
-        point: "",
+        reward_point: "",
         total_reward: "",
       },
       
@@ -82,7 +82,7 @@ export default {
      this.editIndex = index
      let cloned = JSON.parse(JSON.stringify(reward))
      this.form.name_rewards = cloned.name_rewards
-     this.form.point = cloned.point
+     this.form.reward_point = cloned.reward_point
      this.form.total_reward = cloned.total_reward
   },
 
@@ -90,7 +90,7 @@ export default {
     this.editIndex = -1
     this.form = {
       name_rewards: "",
-      point: "",
+      reward_point: "",
       total_reward: "",
     }
   },
@@ -100,7 +100,7 @@ export default {
     let payload = {
       id: rew.id,
       name_rewards: this.form.name_rewards,
-      point: this.form.point,
+      reward_point: this.form.reward_point,
       total_reward: this.form.total_reward,
     }
     console.log(payload);
@@ -113,7 +113,7 @@ export default {
     let payload = {
       id: this.rewards[this.deleteIndex].id,
       name_rewards: this.form.name_rewards,
-      point: this.form.point,
+      reward_point: this.form.reward_point,
       total_reward: this.form.total_reward,
 
     }

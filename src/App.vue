@@ -8,6 +8,7 @@
       <router-link v-if="isAuthen()" to="/redeemreward"> Redeem Reward </router-link> 
       <router-link v-if="!isAuthen()" to="/register">Register</router-link> 
       <router-link v-if="isAuthen()" to="/logout"> logout</router-link> 
+      <router-link v-if="isAuthen()" to="/redeemed"> Redeemed</router-link>
     </div>
     <router-view/>
   </div>
