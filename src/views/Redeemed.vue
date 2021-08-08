@@ -12,10 +12,9 @@
 
         <tbody>
             <tr v-for="(rew, index) in redeemeds" :key="index">
-                <td >{{rew.reward.reward_point}}</td>
-                <td  >{{rew.reward.name_rewards}}</td>
-                <!-- <td v-if="rew.users_permissions_user.username === currentUser.username">{{rew.reward.reward_point}}</td>
-                <td v-if="rew.users_permissions_user.username === currentUser.username">{{rew.reward.name_rewards}}</td> -->
+                <td v-if="rew.users_permissions_user.username === currentUser.username">{{rew.reward.name_rewards}}</td>
+                <td v-if="rew.users_permissions_user.username === currentUser.username">{{rew.reward.reward_point}}</td>
+                
             
             </tr>
         </tbody>

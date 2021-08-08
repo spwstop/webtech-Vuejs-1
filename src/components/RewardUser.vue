@@ -19,7 +19,7 @@
             <td>{{ index + 1}}</td>
             <td> {{ rew.name_rewards }}</td>
             <td> {{ rew.reward_point }}</td>
-            <td> {{ rew.total_reward }}</td>
+
 
             <td>
             <button @click="openForm(index, rew)">Reedeem</button>
