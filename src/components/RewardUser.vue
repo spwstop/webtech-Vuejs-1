@@ -10,7 +10,6 @@
             <th>#</th>
             <th>Reward</th>
            <th>Use Point</th>
-           <th>Total</th>
           </tr>
           
         </thead>
@@ -22,7 +21,7 @@
 
 
             <td>
-            <button @click="openForm(index, rew)">Reedeem</button>
+            <button @click="openForm(currentUser, rew)">Reedeem</button>
             
           </td>
       
@@ -81,8 +80,19 @@ export default {
       this.rewards = AdminStore.getters.rewards
     },
 
-    openForm(index, rewards) { 
-            this.reward = rewards
+    exchange(index, reward) {
+      if (this.currentUser.point >= reward.reward_point) {
+        openForm(reward)
+      } else {
+        this.$swal({
+          icon: "error",
+        });
+      }
+    },
+
+    openForm(currentUser ,rewards) { 
+        if(currentUser.point >= rewards.reward_point){
+          this.reward = rewards
             this.form.userId = this.currentUser.id
             this.form.rewardId = this.reward.id
             this.pointForm.userId = this.currentUser.id
@@ -91,6 +101,12 @@ export default {
             let res = AuthService.addRedeemed(this.form)
             this.$swal("Redeem Success")
             this.$router.push('/redeemed')
+        } else {
+        this.$swal({
+          icon: "error", title: "YOU NOT ENOUNG POINT!!!"
+          });
+      }
+            
       },
 
   },
