@@ -72,7 +72,7 @@ export default {
       
       await AdminStore.dispatch("fetchReward")
       this.rewards = AdminStore.getters.rewards
-      
+      console.log("reward",this.rewards);
     },
 
     openForm(index, reward){

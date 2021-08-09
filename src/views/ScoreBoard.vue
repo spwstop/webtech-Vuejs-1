@@ -5,6 +5,7 @@
      <reward-table></reward-table>
       <score-board-table></score-board-table> 
       <score-board-use-point-table></score-board-use-point-table>
+      <admin-point-table></admin-point-table>
   </div>
 </template>
 
@@ -13,6 +14,7 @@ import ScoreBoardTable from '@/components/ScoreBoardTable.vue'
 import ScoreBoardUsePointTable from '@/components/ScoreBoardUsePointTable.vue'
 import RewardCreateForm from '@/components/RewardCreateForm.vue'
 import RewardTable from '@/components/RewardTable.vue'
+import AdminPointTable from '@/components/AdminPointTable.vue'
 
 export default {
     name: 'ScoreBoard',
@@ -20,7 +22,10 @@ export default {
     ScoreBoardTable,
     ScoreBoardUsePointTable,
     RewardCreateForm,
-    RewardTable
+    RewardTable,
+    AdminPointTable
+    
+
     
   }
 }

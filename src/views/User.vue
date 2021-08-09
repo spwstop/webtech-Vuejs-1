@@ -46,7 +46,7 @@
 import ActivitiesStore from '@/store/ActivitiesStore'
 import AuthUser from "@/store/AuthUser"
 import AuthService from '@/services/AuthService'
-
+import HistoryUseScore from "../store/HistoryUseScore"
 export default {
     data() {
     return {
@@ -69,8 +69,12 @@ export default {
       }
     },
     methods: {
-        getCurrentUser () {
-            this.currentUser = AuthUser.getters.user
+        async getCurrentUser () {
+            const user = AuthUser.getters.user
+            console.log("user", user);
+            await HistoryUseScore.dispatch("fetchUserById", user.id);
+            this.currentUser = HistoryUseScore.getters.currentUser
+            console.log("current",this.currentUser);
         },
         async fetchActivities(){
             await ActivitiesStore.dispatch('fetchActivities')

@@ -17,15 +17,14 @@
         <tr>
           <th>#Rank</th>
           <th>Username</th>
-          <th>Total Point</th>
+          <th>Gain Point</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(user, index) in userFilter" :key="index">
           <td>{{ index +1 }}</td>
           <td>{{ user.username }}</td>
-          <td>{{ user.user_point }}</td>
-          <td>{{ user.date }}</td>
+          <td>{{ user.use_point }}</td>
         </tr>
       </tbody>
     </table>
@@ -33,6 +32,7 @@
 </template>
 
 <script>
+import ActivitiesStore from "../store/ActivitiesStore"
 import HistoryUseScore from '@/store/HistoryUseScore'
 export default {
   data(){
@@ -85,7 +85,7 @@ export default {
         }
         return true;  
       })
-    }
+    },
     
   }
 

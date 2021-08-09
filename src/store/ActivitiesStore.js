@@ -33,7 +33,10 @@ export default new Vuex.Store({
         async fetchFinished ( {commit} ) {
             let res = await Axios.get(api_endpoint + "/finisheds")
             commit("fetch", {res})
-
+        },
+        async fetchActivityById( {commit}, payload ) {
+            let res = await Axios.get(api_endpoint + "/activities/" +payload.id)
+            return res.data
         },
     },
     modules: {},
