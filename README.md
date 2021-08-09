@@ -1,5 +1,7 @@
-#Introduction
+# Introduction
     website นี้เป็น website สำหรับผู้ใช้ที่ต้องการวางแผน หรือเป็นสิ่งกระตุ้นในการใช้ชีวิตประจำวันในแต่ละวัน โดยจะมีกิจกรรมที่กำหนดมา และเมื่อผู้ใช้ทำสิ่งนั้นสำเร็จ (ในชีวิตจริง) ให้ผู้ใช้ทำการกดปุ่มนั้นๆ ผู้ใช้จะได้รับคะแนน เพื่อนำไปแลกกิจกรรมที่เป็นรางวัลได้
+
+    
 ในการเข้าถึง website มีอยู่ 2 บทบาท ได้แก่
 - Admin
     - สามารถแก้ไข, เพิ่ม, ลบ, กำหนดจำนวน ของรางวัลได้
@@ -10,11 +12,28 @@
     - สามารถแลกกิจกรรมที่เป็นรางวัลได้
     - สามารถดูประวัติการแลกของรางวัลได้
 
-##Install
+## Install
 1.Run คำสั่ง git clone https://github.com/spwstop/webtech-Vuejs-1.git ใน Directory ที่ต้องการเก็บ Folder ที่ได้
+
+
 2.เข้าสู่ Directory ของ Folder ที่ได้มา (cd webtech-Vuejs-1)
+
+
 3.Run คำสั่ง npm install และรอการดำเนินการ
+
+
 4.Run คำสั่ง npm run serve และรอการดำเนินการ
+
+
 5.นำ URL ที่ได้ (http://localhost:8080/) เปิดใน Browser
 
-##Test Account
+
+## Test Account
+Admin
+- username:admin1 password:123465
+
+
+User
+- username:user1 password:123465
+- username:user2 password:123465
+- username:user3 password:1234653
