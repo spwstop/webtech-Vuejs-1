@@ -77,9 +77,17 @@ export default {
       this.rewards = AdminStore.getters.rewards
     },
 
-    openForm(currentUser ,rewards) { 
+    async openForm(currentUser ,rewards) {
         if(currentUser.point >= rewards.reward_point){
-          this.reward = rewards
+            let payload = {
+                id: rewards.id,
+                name_rewards: rewards.name_rewards,
+                reward_point: rewards.point,
+                total_reward: rewards.total_reward-1,
+            }
+            await AdminStore.dispatch("editReward", payload)
+            this.fetchReward()
+            this.reward = rewards
             this.form.userId = this.currentUser.id
             this.form.rewardId = this.reward.id
             this.pointForm.userId = this.currentUser.id
@@ -90,14 +98,11 @@ export default {
             this.$router.push('/redeemed')
         } else {
         this.$swal({
-          icon: "error", title: "YOU NOT ENOUNG POINT!!!"
-          });
-      }
+          icon: "error", title: "YOU NOT ENOUNG POINT!!!"});
+        }
             
       },
-
-  },
-
+  }
 
 }
 </script>
