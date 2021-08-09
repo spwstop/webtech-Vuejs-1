@@ -7,6 +7,7 @@ import Login from '@/views/Login.vue'
 import Logout from '@/views/Logout.vue'
 import User from '@/views/User.vue'
 import Finished from '@/views/Finished.vue'
+import Redeemed from '@/views/Redeemed.vue'
 
 Vue.use(VueRouter)
 
@@ -45,6 +46,11 @@ const routes = [
     path: '/redeemreward',
     name: 'RedeemReward',
     component: RedeemReward
+  },
+  {
+    path: '/redeemed',
+    name: 'Redeemed',
+    component: Redeemed
   },
   {
     path: '/register',

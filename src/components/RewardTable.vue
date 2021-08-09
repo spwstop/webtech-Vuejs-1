@@ -20,9 +20,9 @@
             <input type="text" v-model="form.name_rewards" />
           </td>
 
-          <td class="rwTd" v-if="index !== editIndex">{{ rew.point }}</td>
+          <td class="rwTd" v-if="index !== editIndex">{{ rew.reward_point }}</td>
           <td class="rwTd" v-if="index === editIndex">
-            <input type="integer" v-model="form.point" />
+            <input type="integer" v-model="form.reward_point" />
           </td>
 
           <td class="rwTd" v-if="index !== editIndex">{{ rew.total_reward }}</td>
@@ -32,7 +32,7 @@
 
           <td v-if="index !== editIndex">
             <button class="finishBtn" @click="openForm(index, rew)">Edit</button>
-            <button class="delBtn" @click="deleteReward(index, rew)"> Delete</button>
+            <button class="delBtn" @click="deleteReward(rew)"> Delete</button>
           </td>
 
           <td v-if="index === editIndex">
@@ -51,15 +51,14 @@
 
 import AdminStore from "@/store/AdminStore"
 export default {
-  data(){
+   data(){
     return {
       rewards: [],
 
       editIndex: -1,
       form: {
         name_rewards: "",
-        point: "",
-        total_reward: "",
+        reward_point: "",
       },
       
     }
@@ -81,7 +80,7 @@ export default {
      this.editIndex = index
      let cloned = JSON.parse(JSON.stringify(reward))
      this.form.name_rewards = cloned.name_rewards
-     this.form.point = cloned.point
+     this.form.reward_point = cloned.reward_point
      this.form.total_reward = cloned.total_reward
   },
 
@@ -89,7 +88,7 @@ export default {
     this.editIndex = -1
     this.form = {
       name_rewards: "",
-      point: "",
+      reward_point: "",
       total_reward: "",
     }
   },
@@ -99,7 +98,7 @@ export default {
     let payload = {
       id: rew.id,
       name_rewards: this.form.name_rewards,
-      point: this.form.point,
+      reward_point: this.form.reward_point,
       total_reward: this.form.total_reward,
     }
     console.log(payload);
@@ -108,17 +107,28 @@ export default {
     this.fetchReward()
   },
 
-  async deleteReward(){
-    let payload = {
-      id: this.rewards[this.deleteIndex].id,
-      name_rewards: this.form.name_rewards,
-      point: this.form.point,
-      total_reward: this.form.total_reward,
+  deleteReward(rew) {
+      this.$swal({
+        title: "Are you sure?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          this.deleteInStore(rew)
+          location.reload()  
+          swal("Success! Your item has been deleted!", {
+            icon: "success",
+          });
+        } else {
+          swal("Your reward is safe!");
+        }
+      });
+    },
 
-    }
-    await AdminStore.dispatch("deleteIndex", payload)
-    this.fetchReward()
-  },
+    async deleteInStore(rew) {
+      await AdminStore.dispatch("deleteItem", rew);
+    },
 
   }
 
@@ -127,6 +137,6 @@ export default {
 
 </script>
 
-<style lang="scss">
+<style>
 
 </style>

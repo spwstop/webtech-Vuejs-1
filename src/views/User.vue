@@ -26,22 +26,6 @@
             </tbody>
         </div>
 
-        <!-- <span>
-            <thead>
-            <tr>
-                <th>Activities name |</th>
-                <th>| Activities point</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr v-for = "(fin, index) in finished" :key = "index">
-                <td v-if="fin.users_permissions_user.username === currentUser.username">{{fin.activity.activity_name}}</td>
-                <td v-if="fin.users_permissions_user.username === currentUser.username">{{fin.activity.activity_point}}</td>
-
-            </tr>
-        </tbody>
-        </span> -->
         
  
    </div>

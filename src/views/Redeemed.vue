@@ -1,24 +1,27 @@
 <template>
-    <span>
-        <div>Username: {{currentUser.username}} </div>
-
+    <div>
+        <div class="info">
+            <span>Username: </span>
+            <span class="showUser">{{currentUser.username}} </span>
+        </div>
+        <div class="table">
             <thead>
             <tr>
-                <th>Reward name |</th>
-                <th>| Reward point</th>
+                <th class="headName">Reward name |</th>
+                <th class="headPoint">| Reward point</th>
             </tr>
         </thead>
 
         <tbody>
             <tr v-for="(rew, index) in redeemeds" :key="index">
-                <td v-if="rew.users_permissions_user.username === currentUser.username">{{rew.reward.name_rewards}}</td>
-                <td v-if="rew.users_permissions_user.username === currentUser.username">{{rew.reward.reward_point}}</td>
+                <td class="finname" v-if="rew.users_permissions_user.username === currentUser.username">{{rew.reward.name_rewards}}</td>
+                <td class="finpoint" v-if="rew.users_permissions_user.username === currentUser.username">{{rew.reward.reward_point}}</td>
                 
             
             </tr>
         </tbody>
-        
-    </span>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -50,5 +53,13 @@ export default {
 </script>
 
 <style>
-
+tbody{
+    background: white;
+}
+.finname,.finpoint{
+    padding: 15px;
+}
+tr:nth-child(even){ 
+  background-color: #e9eef6;
+}
 </style>
