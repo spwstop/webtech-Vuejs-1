@@ -50,7 +50,7 @@ export default {
     },
     mounted() {
         if (this.isAuthen()) {
-            this.$router.push("/user")
+            this.$router.push("/login")
         }
     }
 }

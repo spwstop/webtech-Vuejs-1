@@ -1,8 +1,6 @@
 <template>
     <span>
         <div>Username: {{currentUser.username}} </div>
-        <div>Point:{{currentUser.point}}</div>
-
             <thead>
             <tr>
                 <th>Activities name |</th>

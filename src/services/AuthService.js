@@ -104,11 +104,10 @@ export default{
             let res = await Axios.post(url, body)
             if (res.status === 200) {
                 console.log(res.data);
-                localStorage.setItem(auth_key, JSON.stringify(res.data))
                 return {
                     success : true,
-                    user: res.data.user,
-                    jwt: res.data.jwt
+                    user: res.data,
+
                 }
             } else {
                 console.log("NOT 200",res);
@@ -133,12 +132,9 @@ export default{
             }
             let res = await Axios.put(url, body)
             if (res.status === 200) {
-                console.log(res.data);
-                localStorage.setItem(auth_key, JSON.stringify(res.data))
                 return {
                     success : true,
-                    user: res.data.user,
-                    jwt: res.data.jwt
+                    user: res.data,
                 }
             } else {
                 console.log("NOT 200",res);
@@ -154,36 +150,6 @@ export default{
             }
         }
     },
-    async addRedeemed ({rewardId,userId}) {
-        try {
-            let url = `${api_endpoint}/redeemeds`
-            let body = {
-                users_permissions_user : userId,
-                reward: rewardId
-            }
-            let res = await Axios.post(url, body)
-            if (res.status === 200) {
-                console.log(res.data);
-                localStorage.setItem(auth_key, JSON.stringify(res.data))
-                return {
-                    success : true,
-                    user: res.data.user,
-                    jwt: res.data.jwt
-                }
-            } else {
-                console.log("NOT 200",res);
-            }
 
-        } catch (e) {
-            console.error(e);
-            if (e.response.status === 400){
-                return{
-                    success: false,
-                    message: e.response.data.message[0].messages[0].message
-                }
-            }
-        }
-    },
-    
 
 }

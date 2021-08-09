@@ -1,8 +1,5 @@
 <template>
   <div>
-      <div>Username: {{currentUser.username}} </div>
-        <div>Point:{{currentUser.point}}</div>
-
       This is your reward
       <table>
         <thead>
@@ -10,6 +7,7 @@
             <th>#</th>
             <th>Reward</th>
            <th>Use Point</th>
+           <th>Total</th>
           </tr>
           
         </thead>
@@ -17,14 +15,15 @@
           <tr v-for="(rew, index) in rewards" :key="index">
             <td>{{ index + 1}}</td>
             <td> {{ rew.name_rewards }}</td>
-            <td> {{ rew.reward_point }}</td>
+            <td> {{ rew.point }}</td>
+            <td> {{ rew.total_reward }}</td>
 
-
-            <td>
-            <button @click="openForm(currentUser, rew)">Reedeem</button>
-            
+            <td v-if="index !== redeem">
+            <button @click="redeem(rew)">Redeem</button>
           </td>
-      
+            <!-- <td v-if="index=== reedeem">
+              <input type="integer" v-model="form.total_reward">
+            </td> -->
             
 
           </tr>
@@ -35,81 +34,40 @@
 
 <script>
 
-import RewardStore from "@/store/RewardStore"
 import AdminStore from "@/store/AdminStore"
-import AuthUser from "@/store/AuthUser"
-import AuthService from '@/services/AuthService'
-
 export default {
   data(){
     return {
       rewards: [],
-      reward:'',
 
-      redeemeds: [],
-      currentUser: '',
-      
-      pointForm:{
-            newPoint : '',
-            userId:''
-      },
-
-      form:{
-            userId:"",   
-            rewardId: ""
-                   
-      },
+      editIndex: -1,
+      form: {
+        name_rewards: "",
+        point: "",
+        total_reward: ""     
+       }
     }
   },
 
   created(){
-    this.getCurrentUser() 
     this.fetchReward()
-    this.fetchRedeemeds()
   },
   methods: {
-    getCurrentUser () {
-            this.currentUser = AuthUser.getters.user
-        },
-    async fetchRedeemeds(){
-            await RewardStore.dispatch('fetchRedeemed')
-            this.redeemeds = RewardStore.getters.redeemeds
-    },
     async fetchReward(){
       await AdminStore.dispatch("fetchReward")
       this.rewards = AdminStore.getters.rewards
     },
-
-    exchange(index, reward) {
-      if (this.currentUser.point >= reward.reward_point) {
-        openForm(reward)
-      } else {
-        this.$swal({
-          icon: "error",
-        });
+    async redeem(rew){
+      let payload = {
+        id: rew.id,
+        name_rewards: rew.name_rewards,
+        point: rew.point,
+        total_reward: rew.total_reward-1,
       }
+      await AdminStore.dispatch("editReward", payload)
+      this.fetchReward()
     },
-
-    openForm(currentUser ,rewards) { 
-        if(currentUser.point >= rewards.reward_point){
-          this.reward = rewards
-            this.form.userId = this.currentUser.id
-            this.form.rewardId = this.reward.id
-            this.pointForm.userId = this.currentUser.id
-            this.pointForm.newPoint = this.currentUser.point - this.reward.reward_point
-            let rev = AuthService.addPoint(this.pointForm)
-            let res = AuthService.addRedeemed(this.form)
-            this.$swal("Redeem Success")
-            this.$router.push('/redeemed')
-        } else {
-        this.$swal({
-          icon: "error", title: "YOU NOT ENOUNG POINT!!!"
-          });
-      }
-            
-      },
-
-  },
+  }
 
 }
 </script>

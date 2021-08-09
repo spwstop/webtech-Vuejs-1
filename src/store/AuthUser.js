@@ -29,6 +29,11 @@ export default new Vuex.Store({
             state.jwt = ""
             state.isAuthen = false
         },
+        UPDATE_USER(state, user){
+            console.log(state.user);
+            state.user = user
+            console.log(state.user);
+        }
     },
     getters: {
         user: (state) => state.user,
@@ -55,9 +60,18 @@ export default new Vuex.Store({
             }
             return res
         },
+        async addPoint ({ commit }, {userId, newPoint}) {
+            let res = await AuthService.addPoint({userId, newPoint})
+            console.log(res);
+            if (res.success) {
+                commit('UPDATE_USER', res.user)
+            }
+            return res
+        },
         logout ({ commit }) {
             AuthService.logout()
             commit('LOGOUT_SUCCESS')
         },
+        
     }
 })

@@ -1,25 +1,25 @@
 <template>
     <div>
-        <div>Username: {{currentUser.username}} </div>
-        <div>Point:{{currentUser.point}}</div>
-        <span>
+        <div id="user">Username: {{currentUser.username}} </div>
+        <div id="point">Point:{{currentUser.point}}</div>
+        <div class="table">
             <thead>
-            <tr>
-                <th>Activities name |</th>
-                <th>| Activities point</th>
-            </tr>
-        </thead>
+                <tr>
+                    <th>Activities name |</th>
+                    <th>| Activities point</th>
+                </tr>
+            </thead>
 
-        <tbody>
-            <tr v-for = "(acti, index) in activities" :key = "index">
-                <td>{{acti.activity_name}}</td>
-                <td>{{acti.activity_point}}</td>
-                <td>
-                    <button @click="openForm(index,acti)">Finish !</button>
-                </td>
-            </tr>
-        </tbody>
-        </span>
+            <tbody>
+                <tr v-for = "(acti, index) in activities" :key = "index">
+                    <td class="actiname">{{acti.activity_name}}</td>
+                    <td class="actipoint">{{acti.activity_point}}</td>
+                    <td>
+                        <button class="finishBtn" @click="openForm(index,acti)">Finish !</button>
+                    </td>
+                </tr>
+            </tbody>
+        </div>
 
         <!-- <span>
             <thead>
@@ -90,13 +90,18 @@ export default {
 
             this.pointForm.userId = this.currentUser.id
             this.pointForm.newPoint = this.currentUser.point + this.activity.activity_point
-            let rev = AuthService.addPoint(this.pointForm)
+            let rev = AuthUser.dispatch('addPoint', this.pointForm)
+            console.log(rev);
             let res = AuthService.addFinished(this.form)
             this.$swal("Login Success", `Welcome`, "success")
+            // location.reload()
             this.$router.push('/finished')
         }
     },
     created() {
+        console.log(AuthUser.getters.jwt);
+        console.log(AuthUser.getters.isAuthen);
+        console.log(AuthUser.getters.user);
         this.getCurrentUser()
         this.fetchActivities()
         this.fetchFinished()
@@ -105,8 +110,30 @@ export default {
 </script>
 
 <style lang="scss">
-span{
+#user,#point{
+    text-align: right;
+    font-size: 40px;
+}
+.table{
+    color: black;
+    width: 90%;
+    margin: auto;
+}
+th{
+    padding: 30px 200px 30px 200px;
+    text-align: center;
     font-size: 20px;
+    background-color: salmon;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.actiname,.actipoint{
+    background: white;
+    border-bottom: 1px solid black;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+.finishBtn {
+    padding: 10px;
+    margin-left: 0px;
 }
     
 </style>
