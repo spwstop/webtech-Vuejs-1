@@ -1,5 +1,8 @@
 <template>
-  <div><reward-user></reward-user></div>
+  <div>
+    <h1>Reward</h1>
+    <reward-user></reward-user>
+  </div>
 </template>
 
 <script>
@@ -16,5 +19,10 @@ export default {
 </script>
 
 <style>
-
+h1{
+  font-size: 70px;
+  color: black;
+  margin-top: 100px;
+  margin-bottom: 10px;
+}
 </style>

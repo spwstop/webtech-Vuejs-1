@@ -1,16 +1,15 @@
 <template>
-  <div>
-    place for reward create form
-    <div>
+  <div class="allRewardForm">
+    <div class="reward">
       <label for="name_rewards">Add Reward  </label>
-        <input type="text" v-model="form.name_rewards">
+        <input type="text" v-model="form.name_rewards" placeholder="Reward">
         <label for="point">  Add Point  </label>
-        <input type="integer" v-model="form.reward_point">
-        <label for="point">  Add total  </label>
-        <input type="integer" v-model="form.total_reward">
+        <input type="integer" v-model="form.point" placeholder="Point">
+        <label for="total_reward"> Total</label>
+        <input type="integer" v-model="form.total" placeholder="Total">
     </div>
     <div>
-        <button @click="addReward">Add</button>
+        <button class="rewardBtn" @click="addReward">Add</button>
       </div>
   </div>
 </template>
@@ -22,8 +21,8 @@ export default {
     return{
       form:{
         name_rewards: "",
-        reward_point: "",
-        total_reward: ""
+        point: "",
+        total_reward:"",
       },
     }
   },
@@ -31,15 +30,15 @@ export default {
     clearForm(){
       this.form = {
         name_rewards: "",
-        reward_point: "",
-        total_reward: ""
+        point: "",
+        total_reward: "",
       }
     },
     addReward(){
       let payload = {
-        name_rewards: this.form.name_rewards, 
-        reward_point: this.form.reward_point,
-        total_reward: this.form.total_reward
+        name_rewards: this.form.name_rewards,
+        point: this.form.point,
+        total: this.form.total_reward,
       }
 
       AdminStore.dispatch("addReward", payload)

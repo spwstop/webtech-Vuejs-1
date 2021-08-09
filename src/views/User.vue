@@ -1,12 +1,17 @@
 <template>
     <div>
-        <div id="user">Username: {{currentUser.username}} </div>
-        <div id="point">Point:{{currentUser.point}}</div>
+        <div class="info">
+            <span>Username: </span>
+            <span class="showUser">{{currentUser.username}} </span>
+            <span>Point: </span>
+            <span class="showPoint">{{currentUser.point}}</span>
+        </div>
+        
         <div class="table">
             <thead>
-                <tr>
-                    <th>Activities name |</th>
-                    <th>| Activities point</th>
+                <tr >
+                    <th class="headName">Activities name </th>
+                    <th class="headPoint"> Activities point</th>
                 </tr>
             </thead>
 
@@ -15,7 +20,7 @@
                     <td class="actiname">{{acti.activity_name}}</td>
                     <td class="actipoint">{{acti.activity_point}}</td>
                     <td>
-                        <button class="finishBtn" @click="openForm(index,acti)">Finish !</button>
+                        <button class="finishBtn" @click="openForm(index,acti)">Finish</button>
                     </td>
                 </tr>
             </tbody>
@@ -93,7 +98,7 @@ export default {
             let rev = AuthUser.dispatch('addPoint', this.pointForm)
             console.log(rev);
             let res = AuthService.addFinished(this.form)
-            this.$swal("Login Success", `Welcome`, "success")
+            this.$swal("Excellent!", `Do it more`, "success")
             // location.reload()
             this.$router.push('/finished')
         }
@@ -110,30 +115,49 @@ export default {
 </script>
 
 <style lang="scss">
-#user,#point{
-    text-align: right;
-    font-size: 40px;
+.info{
+    color: black;
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-top: 50px;
+    font-size: 26px;
+    
+}
+.showPoint,.showUser{
+    color: rgb(71, 177, 111);
+}
+td{
+    border: 1px solid #a4b6d3;
+}
+tr:nth-child(even){ 
+    background-color: #e9eef6;
 }
 .table{
     color: black;
-    width: 90%;
-    margin: auto;
+    padding: 0 20% 0 20%;
+    margin-bottom: 30%;
 }
-th{
+.headName,.headPoint{
+
+    font-family: "Lucida Console", "Courier New", monospace;
     padding: 30px 200px 30px 200px;
     text-align: center;
     font-size: 20px;
-    background-color: salmon;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    background-color: #a4b6d3;
 }
-.actiname,.actipoint{
-    background: white;
-    border-bottom: 1px solid black;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-}
+
 .finishBtn {
-    padding: 10px;
-    margin-left: 0px;
+    float: none;
+    font-weight: bold;
+    padding: 15px;
+    border: none;
+    background: #f9fbff;
+    border: 5px solid #a4b6d3;
+
+}
+.finishBtn:hover{
+    background: #a4b6d3;
+    transition-duration: 0.5s;
 }
     
 </style>

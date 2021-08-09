@@ -1,7 +1,7 @@
 import axios from 'axios'
 import Vue from 'vue'
 import Vuex from 'vuex'
-import AuthService from "@/services/AuthService"
+
 
 let api_endpoint = process.env.VUE_APP_ENDPOINT || 'http://localhost:1337'
 
@@ -13,6 +13,7 @@ export default new Vuex.Store({
   },
 
   getters: {
+    users: (state) => state.data,
     rewards: (state) => state.data,
   },
   mutations: {
@@ -24,12 +25,23 @@ export default new Vuex.Store({
     },
     edit(state, payload ){
       state.data = payload
+      // console.log("payload",payload);
+      // state.data[payload.id].name_rewards = payload.name_rewards
+      // state.data[payload.id].point = payload.point
+      // state.data[payload.id].total_reward = payload.total_reward
     },
-    delete(state, { payload }) {
-      state.data[payload.index] = payload.data
+    delete(state, payload){
+      state.data.splice(payload)
     }
   },
   actions: {
+    async fetchUser({ commit }){
+      let res = await axios.get(api_endpoint + "/users")
+      commit("fetch", { res })
+      console.log("hello");
+      console.log(res)
+    },
+
     async fetchReward({ commit }){
       let res = await axios.get(api_endpoint + "/rewards")
       commit("fetch", { res })
@@ -41,7 +53,7 @@ export default new Vuex.Store({
       let url = api_endpoint + "/rewards/" + payload.id
       let body = {
         name_rewards: payload.name_rewards,
-        reward_point: payload.reward_point,
+        point: payload.point,
         total_reward: payload.total_reward
       }
       
@@ -59,7 +71,7 @@ export default new Vuex.Store({
       let url = api_endpoint + "/rewards"
       let body = {
         name_rewards: payload.name_rewards,
-        reward_point: payload.reward_point    ,
+        point: payload.point,
         total_reward: payload.total_reward
       }
       let res = await axios.post(url, body)
@@ -68,20 +80,37 @@ export default new Vuex.Store({
       }else {
         console.error(res)
       }
+
+      // let name_rewards = await Axios.get(api_endpoint + "/name_rewards")
+      // name_rewards = name_rewards.data
+      // type_ids = []
+      // for (let type of name_rewards) {
+      //   if (type.name_rewards === type){
+      //     type_ids.push(type.id)
+      //   }
+      // }
+      // console.log(type_ids)
+      // let res = await axios.post(url, body)
+      // let data = res.data
+      // commit("add", data)
     },
 
-    async deleteItem({ commit }, payload) {
-      let url = api_endpoint + "/rewards/" + payload.id
-      let headers = AuthService.getApiHeader()
-      let res = await axios .delete(url, headers)
-      if (res.status === 200) {
-          commit("edit", res)
-          return {
-              success: true,
-              data: res
-          }
+    async DeleteReward({ commit }, payload){
+      let url = api_endpoint + "/rewards"
+      let body = {
+        name_rewards: payload.name_rewards,
+        point: payload.point,
+        total_reward: payload.total_reward
+
       }
-  }
+      let res = await axios.post(url, body)
+      if(res.status === 200){
+        commit("delete", res.data)
+      }else{
+        console.error(res)
+      }
+
+    }
   },
   modules: {},
   

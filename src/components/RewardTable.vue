@@ -1,42 +1,43 @@
 <template>
 
   <div>
-    place for reward table
-    <table>
+    <table class="rwTb">
       <thead>
-        <tr>
-          <th>Reward </th>
-          <th>Use Point</th>
-           <th>Total</th>
+        <tr class="rwTr">
+          <th class="rewardHead">Number</th>
+          <th class="rewardHead">Reward </th>
+          <th class="rewardHead">Use Point</th>
+          <th class="rewardHead">Total</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(rew, index) in rewards" :key="index">
+        <tr class="rwTr2" v-for="(rew, index) in rewards" :key="index">
 
-          <td v-if="index !== editIndex">{{ rew.name_rewards }}</td>
-          <td v-if="index === editIndex">
+          <td class="rwTd">{{ index +1 }}</td>
+
+          <td class="rwTd" v-if="index !== editIndex">{{ rew.name_rewards }}</td>
+          <td class="rwTd" v-if="index === editIndex">
             <input type="text" v-model="form.name_rewards" />
           </td>
 
-          <td v-if="index !== editIndex">{{ rew.reward_point }}</td>
-          <td v-if="index === editIndex">
-            <input type="integer" v-model="form.reward_point" />
+          <td class="rwTd" v-if="index !== editIndex">{{ rew.point }}</td>
+          <td class="rwTd" v-if="index === editIndex">
+            <input type="integer" v-model="form.point" />
           </td>
 
-          <td v-if="index !== editIndex">{{ rew.total_reward }}</td>
-          <td v-if="index === editIndex">
+          <td class="rwTd" v-if="index !== editIndex">{{ rew.total_reward }}</td>
+          <td class="rwTd" v-if="index === editIndex">
             <input type="integer" v-model="form.total_reward" />
-          </td> 
-
+          </td>
 
           <td v-if="index !== editIndex">
-            <button @click="openForm(index, rew)">Edit</button>
-            <button @click="deleteReward(rew)"> Delete</button>
+            <button class="finishBtn" @click="openForm(index, rew)">Edit</button>
+            <button class="delBtn" @click="deleteReward(index, rew)"> Delete</button>
           </td>
 
           <td v-if="index === editIndex">
-            <button @click="editReward(rew)">Update Reward</button>
-            <button @click="closeForm">Cancel</button>
+            <button class="editBtn" @click="editReward(rew)">Update Reward</button>
+            <button class="finishBtn" @click="closeForm">Cancel</button>
           </td>
 
         </tr>
@@ -57,7 +58,8 @@ export default {
       editIndex: -1,
       form: {
         name_rewards: "",
-        reward_point: "",
+        point: "",
+        total_reward: "",
       },
       
     }
@@ -79,7 +81,7 @@ export default {
      this.editIndex = index
      let cloned = JSON.parse(JSON.stringify(reward))
      this.form.name_rewards = cloned.name_rewards
-     this.form.reward_point = cloned.reward_point
+     this.form.point = cloned.point
      this.form.total_reward = cloned.total_reward
   },
 
@@ -87,7 +89,7 @@ export default {
     this.editIndex = -1
     this.form = {
       name_rewards: "",
-      reward_point: "",
+      point: "",
       total_reward: "",
     }
   },
@@ -97,7 +99,7 @@ export default {
     let payload = {
       id: rew.id,
       name_rewards: this.form.name_rewards,
-      reward_point: this.form.reward_point,
+      point: this.form.point,
       total_reward: this.form.total_reward,
     }
     console.log(payload);
@@ -106,28 +108,17 @@ export default {
     this.fetchReward()
   },
 
-  deleteReward(rew) {
-      this.$swal({
-        title: "Are you sure?",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      }).then((willDelete) => {
-        if (willDelete) {
-          this.deleteInStore(rew)
-          location.reload()  
-          swal("Success! Your item has been deleted!", {
-            icon: "success",
-          });
-        } else {
-          swal("Your reward is safe!");
-        }
-      });
-    },
+  async deleteReward(){
+    let payload = {
+      id: this.rewards[this.deleteIndex].id,
+      name_rewards: this.form.name_rewards,
+      point: this.form.point,
+      total_reward: this.form.total_reward,
 
-    async deleteInStore(rew) {
-      await AdminStore.dispatch("deleteItem", rew);
-    },
+    }
+    await AdminStore.dispatch("deleteIndex", payload)
+    this.fetchReward()
+  },
 
   }
 
@@ -136,9 +127,6 @@ export default {
 
 </script>
 
-
-</script>
-
-<style>
+<style lang="scss">
 
 </style>

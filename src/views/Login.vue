@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form id="form" @submit.prevent="login">
+    <form @submit.prevent="login">
       <div id="login-text">Login</div>
       <div><img src="../assets/login-icon.png"></div>
       <div><label  for="username">Username</label></div>
@@ -11,7 +11,7 @@
       
 
       <div>
-        <button>Login</button>
+        <button class="loginBtn">Login</button>
       </div>
     </form>
   </div>
@@ -52,23 +52,25 @@ export default {
 </script>
 
 <style lang="scss">
-html{
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(#EBF0F7,#D4E1F6, #C8D6ED, #CFD4FD, #F1D2EB, #F4DCEC);
-}
+
 form{
+
     font-weight: bold;
     font-family: "Lucida Console", "Courier New", monospace;
     width: 50%;
     margin-left: 25%;
-    padding: 50px 20px 30px 20px;
+    padding: 0px 0px 80px 0px;
     font-size: 20px;
+    background: linear-gradient(#EBF0F7,#f4f4ff, #dae3f1, #CFD4FD, #F1D2EB, #F4DCEC);
     color: #242b35;
+    margin-bottom: 20%;
 }
 #login-text {
+    background: #a4b6d3;
     font-size:100px;
-    margin-bottom: 50px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    margin-bottom: 20px;
 }
 input {
     text-align: center;
@@ -78,7 +80,7 @@ input {
 }
 
 
-button{
+.loginBtn{
   font-family: "Lucida Console", "Courier New", monospace;
   border : none;
   margin-top: 10px ;
@@ -87,9 +89,9 @@ button{
   font-weight: bold;
   border-radius: 20px;
 }
-button:hover{
+.loginBtn:hover{
   background: #5a779c;
-  transition-duration: 0.5s;
+  transition-duration: 0.4s;
 }
 img{
   width: 10%;

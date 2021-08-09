@@ -1,8 +1,6 @@
 <template>
   <div>
-      place for scoreboard use point table
-      <button @click="findTopRank()">Sort use Point</button>
-      <div>
+      <div class="reward">
         <label>
             Start date
         </label>
@@ -10,23 +8,24 @@
         <label>
             End date
         </label>
-        <input type="date" v-model="endDate">
-        <button @click="filterItem()">Filter Date</button>
+        <input class="endDate" type="date" v-model="endDate">
+        <button class="scrBtn" @click="filterItem()">Filter Date</button>
+        <button class="scrBtn" @click="findTopRank()">Sort use Point</button>
       </div>
-      <table>
+      <table class="scTb">
         <thead>
           <tr>
-            <th>#Rank</th>
-            <th>Username</th>
-            <th>Use Point</th>
+            <th class="scoreHead">Rank</th>
+            <th class="scoreHead">Username</th>
+            <th class="scoreHead">Use Point</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(user, index) in userFilter" :key="index">
-              <td>{{ index +1 }}</td>
-              <td>{{ user.username }}</td>
-              <td>{{ user.use_point }}</td>
-              <td>{{ user.date}}</td>
+              <td  class="rwTd">{{ index +1 }}</td>
+              <td  class="rwTd">{{ user.username }}</td>
+              <td  class="rwTd">{{ user.use_point }}</td>
+              <td  class="rwTd">{{ user.date}}</td>
           </tr>
         </tbody>
       </table>
