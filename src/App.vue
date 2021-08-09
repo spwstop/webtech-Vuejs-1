@@ -3,11 +3,11 @@
     <div id="nav">
 
       <router-link v-if="!isAuthen()" to="/login">Login</router-link> 
-      <router-link v-if="isAuthen()" to="/user"> User </router-link> 
-      <router-link v-if="isAuthen()" to="/finished"> Finished </router-link> 
-      <router-link v-if="isAuthen()" to="/scoreboard"> Score Board </router-link> 
-      <router-link v-if="isAuthen()" to="/redeemreward"> Redeem Reward </router-link> 
-      <router-link v-if="isAuthen()" to="/redeemed"> Redeemed </router-link> 
+      <router-link v-if="isAuthen() && !isAdmin()" to="/user"> User </router-link> 
+      <router-link v-if="isAuthen() && !isAdmin()" to="/finished"> Finished </router-link> 
+      <router-link v-if="isAuthen() && isAdmin()" to="/scoreboard"> Score Board </router-link> 
+      <router-link v-if="isAuthen() && !isAdmin()" to="/redeemreward"> Redeem Reward </router-link> 
+      <router-link v-if="isAuthen() && !isAdmin()" to="/redeemed"> Redeemed </router-link> 
       <router-link v-if="!isAuthen()" to="/register">Register</router-link> 
       <router-link v-if="isAuthen()" to="/logout"> logout</router-link> 
     </div>
@@ -18,11 +18,25 @@
 <script>
 import AuthUser from '@/store/AuthUser'
 export default {
+  data() {
+      return {
+        currentUser: '',
+      }
+  },
   methods:{
     isAuthen(){
       return AuthUser.getters.isAuthen
-    }
-  }
+    },
+    isAdmin(){
+      return AuthUser.getters.isAdmin
+    },
+    getCurrentUser () {
+      this.currentUser = AuthUser.getters.user
+    },
+  },
+  created(){
+    this.getCurrentUser()
+  },
 }
 </script>
 

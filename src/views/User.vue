@@ -109,6 +109,7 @@ export default {
 }
 .showPoint,.showUser{
     color: rgb(71, 177, 111);
+    font-size: 26px;
 }
 td{
     border: 1px solid #a4b6d3;

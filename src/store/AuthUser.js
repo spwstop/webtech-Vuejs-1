@@ -13,7 +13,8 @@ let auth = JSON.parse(localStorage.getItem(auth_key))
 const initialState = {
     user: auth ? auth.user : "",
     jwt: auth ? auth.jwt : "",
-    isAuthen: auth ? true : false
+    isAuthen: auth ? true : false,
+    isAdmin: auth ? auth.user.role.type === "admin" : false
 }
 
 export default new Vuex.Store({
@@ -23,11 +24,13 @@ export default new Vuex.Store({
             state.user = user
             state.jwt = jwt
             state.isAuthen = true
+            state.isAdmin = state.user.role.type === "admin"
         },
         LOGOUT_SUCCESS(state) {
             state.user = ""
             state.jwt = ""
             state.isAuthen = false
+            state.isAdmin = false
         },
         UPDATE_USER(state, user){
             console.log(state.user);
@@ -39,6 +42,7 @@ export default new Vuex.Store({
         user: (state) => state.user,
         jwt: (state) => state.jwt,
         isAuthen: (state) => state.isAuthen,
+        isAdmin: (state) => state.isAdmin,
     },
     actions: {
         async login ({ commit }, {username, password}) {

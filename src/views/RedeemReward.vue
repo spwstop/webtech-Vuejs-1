@@ -25,4 +25,14 @@ h1{
   margin-top: 100px;
   margin-bottom: 10px;
 }
+.showU,.showP {
+  color: rgb(71, 177, 111);
+  font-size: 24px;
+  font-weight: bold;
+}
+.show{
+  font-weight: bold;
+  font-size: 24px;
+}
+
 </style>
