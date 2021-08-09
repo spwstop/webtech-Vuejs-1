@@ -2,11 +2,11 @@
   <div>
     <div class="reward">
       <label>
-        start date
+        Start date
       </label>
       <input type="date" v-model="startDate">
       <label>
-        before date
+        End date
       </label>
       <input class="endDate" type="date" v-model="endDate">
       <button class="scrBtn" @click="filterItem()">Filter Date</button>
@@ -22,10 +22,10 @@
       </thead>
       <tbody>
         <tr v-for="(user, index) in userFilter" :key="index">
-          <td class="rwTd">{{ index +1 }}</td>
-          <td class="rwTd">{{ user.username }}</td>
-          <td class="rwTd">{{ user.user_point }}</td>
-          <td class="rwTd">{{ user.date }}</td>
+          <td class="scsTd">{{ index +1 }}</td>
+          <td class="scsTd">{{ user.username }}</td>
+          <td class="scsTd">{{ user.user_point }}</td>
+          <td class="scsTd">{{ user.date }}</td>
         </tr>
       </tbody>
     </table>

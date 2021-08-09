@@ -22,10 +22,10 @@
         </thead>
         <tbody>
           <tr v-for="(user, index) in userFilter" :key="index">
-              <td  class="rwTd">{{ index +1 }}</td>
-              <td  class="rwTd">{{ user.username }}</td>
-              <td  class="rwTd">{{ user.use_point }}</td>
-              <td  class="rwTd">{{ user.date}}</td>
+              <td  class="scsTd">{{ index +1 }}</td>
+              <td  class="scsTd">{{ user.username }}</td>
+              <td  class="scsTd">{{ user.use_point }}</td>
+              <td  class="scsTd">{{ user.date}}</td>
           </tr>
         </tbody>
       </table>

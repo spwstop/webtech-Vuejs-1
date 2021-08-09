@@ -2,10 +2,10 @@
   <div>
       <table class="userTb">
         <thead>
-          <span>Username: </span>
-          <span class="showUser">{{currentUser.username}} </span>
-          <span>Point: </span>
-          <span class="showPoint">{{currentUser.point}}</span>
+          <span class="show">Username: </span>
+          <span class="showU">{{currentUser.username}} </span>
+          <span class="show">Point: </span>
+          <span class="showP">{{currentUser.point}}</span>
           <tr class="rwTr">
             <th class="rewardHead">Number</th>
             <th class="rewardHead">Reward</th>

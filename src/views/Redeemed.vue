@@ -7,8 +7,8 @@
         <div class="table">
             <thead>
             <tr>
-                <th class="headName">Reward name |</th>
-                <th class="headPoint">| Reward point</th>
+                <th class="headName">Reward name</th>
+                <th class="headPoint">Reward point</th>
             </tr>
         </thead>
 

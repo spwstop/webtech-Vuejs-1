@@ -73,6 +73,9 @@ h1{
   margin-left: auto;
   margin-bottom: 100px;
 }
+.scsTd{
+  padding: 20px;
+}
 .scTb{
   color: black;
   width: 80%;
