@@ -5,9 +5,9 @@
       <label for="name_rewards">Add Reward  </label>
         <input type="text" v-model="form.name_rewards">
         <label for="point">  Add Point  </label>
-        <input type="integer" v-model="form.point">
-        <label for="total_reward"> Total</label>
-        <input type="integer" v-model="form.total">
+        <input type="integer" v-model="form.reward_point">
+        <label for="point">  Add total  </label>
+        <input type="integer" v-model="form.total_reward">
     </div>
     <div>
         <button @click="addReward">Add</button>
@@ -22,8 +22,8 @@ export default {
     return{
       form:{
         name_rewards: "",
-        point: "",
-        total_reward:"",
+        reward_point: "",
+        total_reward: ""
       },
     }
   },
@@ -31,15 +31,15 @@ export default {
     clearForm(){
       this.form = {
         name_rewards: "",
-        point: "",
-        total_reward: "",
+        reward_point: "",
+        total_reward: ""
       }
     },
     addReward(){
       let payload = {
-        name_rewards: this.form.name_rewards,
-        point: this.form.point,
-        total: this.form.total_reward,
+        name_rewards: this.form.name_rewards, 
+        reward_point: this.form.reward_point,
+        total_reward: this.form.total_reward
       }
 
       AdminStore.dispatch("addReward", payload)

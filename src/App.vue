@@ -6,6 +6,7 @@
       <router-link v-if="isAuthen()" to="/finished"> Finished </router-link> 
       <router-link v-if="isAuthen()" to="/scoreboard"> Score Board </router-link> 
       <router-link v-if="isAuthen()" to="/redeemreward"> Redeem Reward </router-link> 
+      <router-link v-if="isAuthen()" to="/redeemed"> Redeemed </router-link> 
       <router-link v-if="!isAuthen()" to="/register">Register</router-link> 
       <router-link v-if="isAuthen()" to="/logout"> logout</router-link> 
     </div>
