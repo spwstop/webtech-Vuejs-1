@@ -34,7 +34,7 @@ export default {
       let res = await AuthUser.dispatch('login', this.form)
       if (res.success) {
             this.$swal("Login Success", `Welcome, ${res.user.username}`, "success")
-            if (this.form.username === 'admin'){
+            if (this.form.username === 'admin1'){
               this.$router.push('/scoreboard')
             } else {
               this.$router.push('/user')
