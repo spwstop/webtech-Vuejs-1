@@ -13,21 +13,21 @@ export default new Vuex.Store({
   },
 
   getters: {
-    finisheds: (state) => state.data,
-    activities: (state) => state.data
+    redeemeds: (state) => state.data,
+    rewards: (state) => state.data
   },
   mutations: {
-      fetchFinished(state, { res }){
+      fetchRedeemeds(state, { res }){
           state.data = res.data
       },
   },
   actions: {
-      async fetchFinished({ commit }){
-          let res = await axios.get(api_endpoint + "/finisheds")
-          commit("fetchFinished", { res })
+      async fetchRedeemeds({ commit }){
+          let res = await axios.get(api_endpoint + "/redeemeds")
+          commit("fetchRedeemeds", { res })
       },
-      async fetchActivities ({ commit }){
-          let res = await axios.get(api_endpoint + "/activities")
+      async fetchRewards ({ commit }){
+          let res = await axios.get(api_endpoint + "/rewards")
           commit("fetch", { res })
       }
 

@@ -20,18 +20,18 @@
               <tr>
                   <th>#No</th>
                   <th>Username</th>
-                  <th>activities</th>
-                  <th>point</th>
+                  <th>reward</th>
+                  <th>UsePoint</th>
                   <th>date</th>
               </tr>
           </thead>
           <tbody>
-              <tr v-for="(fin, index) in finishFilter" :key="index">
+              <tr v-for="(red, index) in redeemFilter" :key="index">
                   <td>{{ index + 1 }}</td>
-                  <td>{{ fin.users_permissions_user.username }}</td>
-                  <td>{{ fin.activity.activity_name }}</td>
-                  <td>{{ fin.activity.activity_point }}</td>
-                  <td>{{ fin.created_at }}</td>
+                  <td>{{ red.users_permissions_user.username }}</td>
+                  <td>{{ red.reward.name_rewards }}</td>
+                  <td>{{ red.reward.reward_point }}</td>
+                  <td>{{ red.created_at }}</td>
               </tr>
           </tbody>
       </table>
@@ -44,15 +44,15 @@ import UsePointStore from '@/store/UsePointStore'
 export default {
     data(){
         return{
-            finisheds:[],
-            finishFilter: [],
+            redeemeds:[],
+            redeemFilter: [],
             form: {
                 users_permissions_user:{
                     username: "",
                 },
-                activity: {
-                    activity_name: "",
-                    activity_point: "",
+                reward: {
+                    name_rewards: "",
+                    reward_point: "",
                 },
                 created_at: ""
             },
@@ -62,28 +62,28 @@ export default {
     },
 
     created(){
-        this.fetchFinished()
+        this.fetchRedeemeds()
     },
     methods: {
-        async fetchFinished(){
-            await PointStore.dispatch("fetchFinished")
-            this.finisheds = PointStore.getters.finisheds
-            this.finishFilter = this.finisheds
+        async fetchRedeemeds(){
+            await UsePointStore.dispatch("fetchRedeemeds")
+            this.redeemeds = UsePointStore.getters.redeemeds
+            this.redeemFilter = this.redeemeds
         },
         findTopRank(){
             let sortable = [];
-            for(let i in this.finishFilter){
-                sortable.push(this.finishFilter[i])
-                sortable.sort((a, b) => b.activity.activity_point - a.activity.activity_point)
+            for(let i in this.redeemFilter){
+                sortable.push(this.redeemFilter[i])
+                sortable.sort((a, b) => b.reward.reward_point - a.reward.reward_point)
             };
-         this.finishFilter = sortable
+         this.redeemFilter = sortable
         },
         filterItem() {
             const startDate = new Date(this.startDate);   
             const endDate = new Date(this.endDate);  
       
             console.log(this.startDate, this.endDate);
-            this.finishFilter = this.finisheds.filter(item => {
+            this.redeemFilter = this.redeemeds.filter(item => {
              const itemDate = new Date(item.created_at)
                 if (startDate !== null && endDate !== null) {
                  return startDate <= itemDate && itemDate <= endDate;
