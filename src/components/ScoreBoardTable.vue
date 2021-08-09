@@ -1,18 +1,18 @@
 <template>
-  <div> placre for scoreboard table
-    <button @click="findTopRank()">Sort Point</button>
-    <div>
+  <div>
+    <div class="reward">
       <label>
-        start date
+        Start date
       </label>
       <input type="date" v-model="startDate">
       <label>
-        before date
+        End date
       </label>
-      <input type="date" v-model="endDate">
-      <button @click="filterItem()">Filter Date</button>
+      <input class="endDate" type="date" v-model="endDate">
+      <button class="scrBtn" @click="filterItem()">Filter Date</button>
+      <button class="scrBtn" @click="findTopRank()">Sort Point</button>
     </div>
-    <table>
+    <table class="scTb">
       <thead>
         <tr>
           <th>#Rank</th>

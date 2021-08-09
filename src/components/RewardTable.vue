@@ -1,42 +1,43 @@
 <template>
 
   <div>
-    place for reward table
-    <table>
+    <table class="rwTb">
       <thead>
-        <tr>
-          <th>Reward </th>
-          <th>Use Point</th>
-           <th>Total</th>
+        <tr class="rwTr">
+          <th class="rewardHead">Number</th>
+          <th class="rewardHead">Reward </th>
+          <th class="rewardHead">Use Point</th>
+          <th class="rewardHead">Total</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(rew, index) in rewards" :key="index">
+        <tr class="rwTr2" v-for="(rew, index) in rewards" :key="index">
 
-          <td v-if="index !== editIndex">{{ rew.name_rewards }}</td>
-          <td v-if="index === editIndex">
+          <td class="rwTd">{{ index +1 }}</td>
+
+          <td class="rwTd" v-if="index !== editIndex">{{ rew.name_rewards }}</td>
+          <td class="rwTd" v-if="index === editIndex">
             <input type="text" v-model="form.name_rewards" />
           </td>
 
-          <td v-if="index !== editIndex">{{ rew.reward_point }}</td>
-          <td v-if="index === editIndex">
+          <td class="rwTd" v-if="index !== editIndex">{{ rew.reward_point }}</td>
+          <td class="rwTd" v-if="index === editIndex">
             <input type="integer" v-model="form.reward_point" />
           </td>
 
-          <td v-if="index !== editIndex">{{ rew.total_reward }}</td>
-          <td v-if="index === editIndex">
+          <td class="rwTd" v-if="index !== editIndex">{{ rew.total_reward }}</td>
+          <td class="rwTd" v-if="index === editIndex">
             <input type="integer" v-model="form.total_reward" />
-          </td> 
-
+          </td>
 
           <td v-if="index !== editIndex">
-            <button @click="openForm(index, rew)">Edit</button>
-            <button @click="deleteReward(rew)"> Delete</button>
+            <button class="finishBtn" @click="openForm(index, rew)">Edit</button>
+            <button class="delBtn" @click="deleteReward(rew)"> Delete</button>
           </td>
 
           <td v-if="index === editIndex">
-            <button @click="editReward(rew)">Update Reward</button>
-            <button @click="closeForm">Cancel</button>
+            <button class="editBtn" @click="editReward(rew)">Update Reward</button>
+            <button class="finishBtn" @click="closeForm">Cancel</button>
           </td>
 
         </tr>
@@ -50,7 +51,7 @@
 
 import AdminStore from "@/store/AdminStore"
 export default {
-  data(){
+   data(){
     return {
       rewards: [],
 
@@ -132,9 +133,6 @@ export default {
   }
 
 }
-
-
-</script>
 
 
 </script>

@@ -1,32 +1,29 @@
 <template>
   <div>
-      <div id="user">Username: {{currentUser.username}} </div>
-      <div id="point">Point:{{currentUser.point}}</div>
-
-      This is your reward
-      <table>
+      <table class="userTb">
         <thead>
-          <tr>
-            <th>#</th>
-            <th>Reward</th>
-           <th>Use Point</th>
-           <th>Total</th>
+          <span class="show">Username: </span>
+          <span class="showU">{{currentUser.username}} </span>
+          <span class="show">Point: </span>
+          <span class="showP">{{currentUser.point}}</span>
+          <tr class="rwTr">
+            <th class="rewardHead">Number</th>
+            <th class="rewardHead">Reward</th>
+           <th class="rewardHead">Use Point</th>
+           <th class="rewardHead">Total</th>
           </tr>
           
         </thead>
         <tbody>
           <tr v-for="(rew, index) in rewards" :key="index">
-            <td>{{ index + 1}}</td>
-            <td> {{ rew.name_rewards }}</td>
-            <td> {{ rew.reward_point }}</td>
-            <td> {{ rew.total_reward }}</td>
+            <td class="rwTd">{{ index + 1}}</td>
+            <td class="rwTd"> {{ rew.name_rewards }}</td>
+            <td class="rwTd"> {{ rew.reward_point }}</td>
+            <td class="rwTd"> {{ rew.total_reward }}</td>
 
-            <td>
-            <button @click="openForm(currentUser, rew)">Reedeem</button>
-            
+            <td v-if="index !== redeem">
+            <button class="redBtn" @click="openForm(currentUser, rew)">Redeem</button>
           </td>
-      
-            
 
           </tr>
         </tbody>
@@ -40,7 +37,6 @@ import RewardStore from "@/store/RewardStore"
 import AdminStore from "@/store/AdminStore"
 import AuthUser from "@/store/AuthUser"
 import AuthService from '@/services/AuthService'
-
 export default {
   data(){
     return {
@@ -81,9 +77,17 @@ export default {
       this.rewards = AdminStore.getters.rewards
     },
 
-    openForm(currentUser ,rewards) { 
+    async openForm(currentUser ,rewards) {
         if(currentUser.point >= rewards.reward_point){
-          this.reward = rewards
+            let payload = {
+                id: rewards.id,
+                name_rewards: rewards.name_rewards,
+                reward_point: rewards.point,
+                total_reward: rewards.total_reward-1,
+            }
+            await AdminStore.dispatch("editReward", payload)
+            this.fetchReward()
+            this.reward = rewards
             this.form.userId = this.currentUser.id
             this.form.rewardId = this.reward.id
             this.pointForm.userId = this.currentUser.id
@@ -94,13 +98,11 @@ export default {
             this.$router.push('/redeemed')
         } else {
         this.$swal({
-          icon: "error", title: "YOU NOT ENOUNG POINT!!!"
-          });
-      }
+          icon: "error", title: "YOU NOT ENOUNG POINT!!!"});
+        }
             
       },
-
-  },
+  }
 
 }
 </script>
