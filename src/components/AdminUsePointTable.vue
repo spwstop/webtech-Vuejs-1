@@ -10,8 +10,9 @@
               End date
           </label>
           <input type="date" v-model="endDate">
-          <button class="scrBtn" @click="findTopRank()">sort point</button>
           <button class="scrBtn" @click="filterItem()">Filter Date</button>
+          <button class="scrBtn" @click="findTopRank()">sort point</button>
+          
 
       </div>
 
