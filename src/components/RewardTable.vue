@@ -36,7 +36,7 @@
           </td>
 
           <td v-if="index === editIndex">
-            <button class="editBtn" @click="editReward(rew)">Update Reward</button>
+            <button class="editBtn" @click="coneditReward(rew)">Update Reward</button>
             <button class="finishBtn" @click="closeForm">Cancel</button>
           </td>
 
@@ -92,6 +92,24 @@ export default {
       total_reward: "",
     }
   },
+
+  coneditReward(rew) {
+      this.$swal({
+        title: "Are you sure?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((willEdit) => {
+        if (willEdit) {
+          this.editReward(rew)
+          swal("Success! Your item has been deleted!", {
+            icon: "success",
+          });
+        } else {
+          swal("You don't want to edit  ");
+        }
+      });
+    },
 
   async editReward(rew){
     

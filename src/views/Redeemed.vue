@@ -14,8 +14,8 @@
 
         <tbody>
             <tr v-for="(rew, index) in redeemeds" :key="index">
-                <td class="finname" v-if="rew.users_permissions_user.username === currentUser.username">{{rew.reward.name_rewards}}</td>
-                <td class="finpoint" v-if="rew.users_permissions_user.username === currentUser.username">{{rew.reward.reward_point}}</td>
+                <td class="rename" v-if="rew.users_permissions_user.username === currentUser.username">{{rew.reward.name_rewards}}</td>
+                <td class="repoint" v-if="rew.users_permissions_user.username === currentUser.username">{{rew.reward.reward_point}}</td>
                 
             
             </tr>
@@ -56,7 +56,7 @@ export default {
 tbody{
     background: white;
 }
-.finname,.finpoint{
+.rename,.repoint{
     padding: 15px;
 }
 tr:nth-child(even){ 
