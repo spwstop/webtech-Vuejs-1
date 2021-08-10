@@ -31,7 +31,7 @@ export default {
             let res = await AuthUser.dispatch('register', this.input)
             if (res.success) {
                 this.$swal("Register Success", `Welcome ${res.user.username}`, "success")
-                this.$router.push("/")
+                this.$router.push("/user")
             } else {
                 this.$swal("Register Failed", res.message, "error")
                 this.clearInput()

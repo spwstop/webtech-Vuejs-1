@@ -3,14 +3,14 @@
     <h1>Admin Management</h1>
      <reward-create-form></reward-create-form>
      <reward-table></reward-table>
+     <h2> LeaderBoard Get Point </h2> 
       <admin-point-table></admin-point-table>
+      <h2> LeaderBoard Use Point </h2>
       <admin-use-point-table></admin-use-point-table>
   </div>
 </template>
 
 <script>
-import ScoreBoardTable from '@/components/ScoreBoardTable.vue'
-import ScoreBoardUsePointTable from '@/components/ScoreBoardUsePointTable.vue'
 import RewardCreateForm from '@/components/RewardCreateForm.vue'
 import RewardTable from '@/components/RewardTable.vue'
 import AdminPointTable from '@/components/AdminPointTable.vue'
@@ -19,15 +19,10 @@ import AdminUsePointTable from '../components/AdminUsePointTable.vue'
 export default {
     name: 'ScoreBoard',
   components: {
-    ScoreBoardTable,
-    ScoreBoardUsePointTable,
     RewardCreateForm,
     RewardTable,
     AdminPointTable,
     AdminUsePointTable
-    
-
-    
   }
 }
 </script>
@@ -35,6 +30,12 @@ export default {
 <style lang="scss">
 h1{
   font-size: 70px;
+  color: black;
+  margin-top: 10px;
+  margin-bottom: 100px;
+}
+h2{
+  font-size: 45px;
   color: black;
   margin-top: 10px;
   margin-bottom: 100px;

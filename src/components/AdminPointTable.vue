@@ -1,28 +1,28 @@
 <template>
   <div>
-      for scoreboard 
-      <button @click="findTopRank()">sort point</button>
-      <div>
+
+      <div  class="reward">
           <label>
-              startDate
+              Start date
           </label>
           <input type="date" v-model="startDate">
           <label>
-              before date
+              End date
           </label>
           <input type="date" v-model="endDate">
-          <button @click="filterItem()">Filter Date</button>
+          <button class="scrBtn" @click="findTopRank()">sort point</button>
+          <button class="scrBtn" @click="filterItem()">Filter Date</button>
 
       </div>
 
-      <table>
+      <table  class="scTb">
           <thead>
               <tr>
-                  <th>#No</th>
-                  <th>Username</th>
-                  <th>activities</th>
-                  <th>point</th>
-                  <th>date</th>
+                  <th class="scoreHead">Number</th>
+                  <th class="scoreHead">Username</th>
+                  <th class="scoreHead">activities</th>
+                  <th class="scoreHead">point</th>
+                  <th class="scoreHead">date</th>
               </tr>
           </thead>
           <tbody>
@@ -104,5 +104,7 @@ export default {
 </script>
 
 <style>
-
+td{
+    padding: 15px;
+}
 </style>

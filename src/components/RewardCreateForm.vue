@@ -4,7 +4,7 @@
       <label for="name_rewards">Add Reward  </label>
         <input type="text" v-model="form.name_rewards" placeholder="Reward">
         <label for="point">  Add Point  </label>
-        <input type="integer" v-model="form.reward_point" placeholder="reward_point">
+        <input type="integer" v-model="form.reward_point" placeholder="Point">
         <label for="total_reward"> Total</label>
         <input type="integer" v-model="form.total_reward" placeholder="Total">
     </div>
