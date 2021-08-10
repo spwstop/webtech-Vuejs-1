@@ -78,29 +78,33 @@ export default {
     },
 
     async openForm(currentUser ,rewards) {
-        if(currentUser.point >= rewards.reward_point){
-            let payload = {
-                id: rewards.id,
-                name_rewards: rewards.name_rewards,
-                reward_point: rewards.point,
-                total_reward: rewards.total_reward-1,
-            }
-            await AdminStore.dispatch("editReward", payload)
-            this.fetchReward()
-            this.reward = rewards
-            this.form.userId = this.currentUser.id
-            this.form.rewardId = this.reward.id
-            this.pointForm.userId = this.currentUser.id
-            this.pointForm.newPoint = this.currentUser.point - this.reward.reward_point
-            let rev = AuthUser.dispatch('addPoint', this.pointForm)
-            let res = AuthService.addRedeemed(this.form)
-            this.$swal("Redeem Success")
-            this.$router.push('/redeemed')
-        } else {
-        this.$swal({
-          icon: "error", title: "YOU NOT ENOUNG POINT!!!"});
-        }
-            
+        if(rewards.total_reward > 0){
+          if(currentUser.point >= rewards.reward_point){
+              let payload = {
+                  id: rewards.id,
+                  name_rewards: rewards.name_rewards,
+                  reward_point: rewards.point,
+                  total_reward: rewards.total_reward-1,
+              }
+              await AdminStore.dispatch("editReward", payload)
+              this.fetchReward()
+              this.reward = rewards
+              this.form.userId = this.currentUser.id
+              this.form.rewardId = this.reward.id
+              this.pointForm.userId = this.currentUser.id
+              this.pointForm.newPoint = this.currentUser.point - this.reward.reward_point
+              let rev = AuthUser.dispatch('addPoint', this.pointForm)
+              let res = AuthService.addRedeemed(this.form)
+              this.$swal("Redeem Success")
+              this.$router.push('/redeemed')
+          } else {
+          this.$swal({
+            icon: "error", title: "YOU NOT ENOUNG POINT!!!"});
+          }
+        }else{
+          this.$swal({
+            icon: "error", title: "Item out of stock"});
+          }
       },
   }
 
