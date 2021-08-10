@@ -102,7 +102,7 @@ export default {
       }).then((willEdit) => {
         if (willEdit) {
           this.editReward(rew)
-          swal("Success! Your item has been deleted!", {
+          swal("Success! Your item has been edit!", {
             icon: "success",
           });
         } else {
